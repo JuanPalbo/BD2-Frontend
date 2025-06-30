@@ -57,3 +57,7 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## NPM Installs
+
+npm install @syncfusion/ej2-angular-inputs @syncfusion/ej2-angular-buttons @syncfusion/ej2-base

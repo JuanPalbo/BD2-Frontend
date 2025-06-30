@@ -1,0 +1,47 @@
+<h2>Votación</h2>
+
+<p>Agregue hojas al sobre (puede repetir listas si lo desea).</p>
+
+<div *ngFor="let lista of listas">
+  <button ejs-button (click)="agregarAlSobre(lista)">
+    Agregar {{ lista.nombre }}
+  </button>
+</div>
+
+<hr>
+
+<h3>Sobre actual</h3>
+
+<div *ngIf="sobre.length === 0">
+  <p>No se han agregado hojas al sobre.</p>
+</div>
+<ul>
+  <li *ngFor="let hoja of sobre; let i = index">
+    {{ i + 1 }}. {{ hoja.nombre }}
+  </li>
+</ul>
+
+<br>
+
+<!-- aquí viene el render condicional -->
+<button 
+  *ngIf="sobre.length > 0" 
+  ejs-button 
+  (click)="emitirVoto()">
+  Emitir voto
+</button>
+
+<button 
+  *ngIf="sobre.length === 0" 
+  ejs-button 
+  cssClass="e-outline" 
+  (click)="votarEnBlanco()">
+  Votar en blanco
+</button>
+
+<button 
+  ejs-button 
+  cssClass="e-danger" 
+  (click)="vaciarSobre()">
+  Vaciar sobre
+</button>
