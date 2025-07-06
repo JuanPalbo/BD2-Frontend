@@ -1,1 +1,59 @@
 <p>resultados works!</p>
+<div class="container">
+  <header>
+    <h2>{{ tipoResultado === 'circuito' ? 'Resultados del Circuito' : 'Resultados Globales' }}</h2>
+  </header>
+  
+  <div class="resultados-card">
+    <div class="resultado-item">
+      <strong>Votos Totales:</strong> {{ resultados.votosTotales }}
+    </div>
+    
+    <div class="resultado-section">
+      <h4>Votos por Lista</h4>
+      <div class="votos-lista" *ngFor="let lista of resultados.votosPorLista">
+        <span class="lista-nombre">{{ lista.nombre }}:</span>
+        <span class="lista-votos">{{ lista.votos }}</span>
+      </div>
+    </div>
+    
+    <div class="resultado-section">
+      <h4>Votos por Partido</h4>
+      <div class="votos-partido" *ngFor="let partido of resultados.votosPorPartido">
+        <span class="partido-nombre">{{ partido.nombre }}:</span>
+        <span class="partido-votos">{{ partido.votos }}</span>
+      </div>
+    </div>
+    
+    <div class="resultado-item">
+      <strong>Votos en Blanco:</strong> {{ resultados.votosEnBlanco }}
+    </div>
+    
+    <div class="resultado-item">
+      <strong>Votos Anulados:</strong> {{ resultados.votosAnulados }}
+    </div>
+    
+    <div class="resultado-item">
+      <strong>Votos Observados:</strong> {{ resultados.votosObservados }}
+    </div>
+    
+    <div class="ganador">
+      <h4>Ganador</h4>
+      <div class="ganador-info">
+        <strong>{{ resultados.ganador.nombre }}</strong> - {{ resultados.ganador.votos }} votos
+      </div>
+    </div>
+    
+    <div class="actions">
+      <button ejs-button (click)="volver()" class="back-btn">
+        ← Volver
+      </button>
+    </div>
+  </div>
+  
+  <!-- Loading state -->
+  <div class="loading" *ngIf="cargando">
+    <div class="spinner"></div>
+    <p>Cargando resultados...</p>
+  </div>
+</div>
