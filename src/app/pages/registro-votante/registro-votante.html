@@ -1,15 +1,96 @@
-<div class="registro-votante">
-  <h2>Registro de Votante</h2>
-  <form (ngSubmit)="verificarYVotar()">
-    <div class="form-group">
-      <label for="credencial">Credencial:</label>
-      <input type="text" id="credencial" [(ngModel)]="credencial" name="credencial" required>
-    </div>
-    <div class="form-group">
-      <label for="pin">PIN:</label>
-      <input type="password" id="pin" [(ngModel)]="pin" name="pin" required>
-    </div>
-    <button type="submit">Verificar y Votar</button>
-  </form>
-</div>
+<div class="container">
+  <header>
+    <h2>Registro de Votante</h2>
+  </header>
+  
+  <div class="form-container">
+    <form (ngSubmit)="verificarYVotar()" [class.disabled]="cargando">
+      <div class="form-group">
+        <label for="credencial">Credencial:</label>
+        <input 
+          type="text" 
+          id="credencial" 
+          [(ngModel)]="credencial" 
+          name="credencial" 
+          required 
+          [disabled]="cargando"
+          class="form-input">
+      </div>
+      
+      <div class="form-group">
+        <label for="pin">PIN:</label>
+        <input 
+          type="password" 
+          id="pin" 
+          [(ngModel)]="pin" 
+          name="pin" 
+          required 
+          [disabled]="cargando"
+          class="form-input">
+      </div>
+      
+      <button type="submit" [disabled]="cargando || !credencial || !pin" class="submit-btn">
+        {{ cargando ? 'Verificando...' : 'Verificar y Votar' }}
+      </button>
+    </form>
+  </div>
 
+  <!-- Mensajes de estado -->
+  <div class="message-container" *ngIf="mostrarMensaje">
+    <div class="message" [ngClass]="tipoMensaje">
+      <div class="message-icon">
+        <span *ngIf="tipoMensaje === 'error'">❌</span>
+        <span *ngIf="tipoMensaje === 'success'">✅</span>
+        <span *ngIf="tipoMensaje === 'warning'">⚠</span>
+      </div>
+      <div class="message-content">
+        <h3>{{ tituloMensaje }}</h3>
+        <p>{{ textoMensaje }}</p>
+      </div>
+    </div>
+    
+    <!-- Botones de acción según el estado -->
+    <div class="action-buttons" *ngIf="estadoVotante !== 'invalido'">
+      <button 
+        *ngIf="estadoVotante === 'valido'" 
+        ejs-button 
+        (click)="procederAVotar()" 
+        class="action-btn success">
+        Proceder a Votar
+      </button>
+      
+      <div *ngIf="estadoVotante === 'otro_circuito'" class="circuito-actions">
+        <p class="admin-required">Se requiere autorización del administrador de mesa</p>
+        <div class="admin-password">
+          <label for="adminPassword">Contraseña del Administrador:</label>
+          <input 
+            type="password" 
+            id="adminPassword" 
+            [(ngModel)]="adminPassword" 
+            name="adminPassword" 
+            class="form-input">
+        </div>
+        <div class="circuito-buttons">
+          <button 
+            ejs-button 
+            (click)="cancelarVoto()" 
+            class="action-btn cancel"
+            [disabled]="!adminPassword">
+            Cancelar Voto
+          </button>
+          <button 
+            ejs-button 
+            (click)="observarVoto()" 
+            class="action-btn observe"
+            [disabled]="!adminPassword">
+            Observar Voto
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <button ejs-button (click)="cerrarMensaje()" class="close-btn">
+      Cerrar
+    </button>
+  </div>
+</div>
