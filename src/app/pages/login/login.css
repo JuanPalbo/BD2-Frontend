@@ -1,0 +1,127 @@
+:host {
+  display: block;
+  height: 100vh;
+  background-color: #034AA6;
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: black;
+  text-align: center;
+}
+
+header {
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px 8px 0 0;
+  margin-bottom: 20px;
+}
+
+header h2 {
+  margin: 0;
+  color: #034AA6;
+  font-size: 24px;
+}
+
+.form-section {
+  padding: 20px 0;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-input {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.form-input:focus {
+  border-color: #034AA6;
+  outline: none;
+}
+
+/* Estilos específicos para componentes Syncfusion */
+::ng-deep .form-input.e-textbox {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 0;
+  box-shadow: none;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep .form-input.e-textbox:hover {
+  border-color: #034AA6;
+}
+
+::ng-deep .form-input.e-textbox:focus-within {
+  border-color: #034AA6;
+  box-shadow: none;
+}
+
+::ng-deep .form-input .e-input {
+  border: none;
+  padding: 0 16px;
+  font-size: 16px;
+  background: transparent;
+  height: 100%;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.primary-button {
+  display: block;
+  width: 100%;
+  margin: 20px auto;
+  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #034AA6;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.primary-button:hover {
+  background-color: #023d8a;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .container {
+    margin: 20px;
+    padding: 20px;
+  }
+}
