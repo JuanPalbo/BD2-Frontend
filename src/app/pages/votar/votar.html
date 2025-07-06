@@ -1,47 +1,79 @@
-<h2>Votación</h2>
+<div class="container">
+  <header>
+    <h2>Votación</h2>
+    <p class="subtitle">Agregue hojas al sobre (puede repetir listas si lo desea).</p>
+  </header>
 
-<p>Agregue hojas al sobre (puede repetir listas si lo desea).</p>
+  <div class="voting-content">
+    <!-- Sección de listas disponibles -->
+    <div class="listas-section">
+      <h3>Listas Disponibles</h3>
+      <div class="listas-grid">
+        <div *ngFor="let lista of listas" class="lista-card">
+          <div class="lista-info">
+            <h4>{{ lista.nombre }}</h4>
+          </div>
+          <button ejs-button (click)="agregarAlSobre(lista)" class="agregar-btn">
+            Agregar al Sobre
+          </button>
+        </div>
+      </div>
+    </div>
 
-<div *ngFor="let lista of listas">
-  <button ejs-button (click)="agregarAlSobre(lista)">
-    Agregar {{ lista.nombre }}
-  </button>
+    <!-- Separador -->
+    <div class="separator"></div>
+
+    <!-- Sección del sobre -->
+    <div class="sobre-section">
+      <h3>Sobre de Votación</h3>
+      <div class="sobre-container">
+        <div *ngIf="sobre.length === 0" class="sobre-vacio">
+          <p>No se han agregado hojas al sobre.</p>
+        </div>
+        
+        <div *ngIf="sobre.length > 0" class="sobre-contenido">
+          <div class="sobre-header">
+            <span class="sobre-count">{{ sobre.length }} {{ sobre.length === 1 ? 'hoja' : 'hojas' }} en el sobre</span>
+          </div>
+          <ul class="sobre-lista">
+            <li *ngFor="let hoja of sobre; let i = index" class="sobre-item">
+              <span class="item-number">{{ i + 1 }}.</span>
+              <span class="item-name">{{ hoja.nombre }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="actions-section">
+      <div class="primary-actions">
+        <button 
+          *ngIf="sobre.length > 0" 
+          ejs-button 
+          (click)="emitirVoto()"
+          class="action-btn primary">
+          Emitir Voto
+        </button>
+
+        <button 
+          *ngIf="sobre.length === 0" 
+          ejs-button 
+          (click)="votarEnBlanco()"
+          class="action-btn blank">
+          Votar en Blanco
+        </button>
+      </div>
+
+      <div class="secondary-actions">
+        <button 
+          ejs-button 
+          (click)="vaciarSobre()"
+          class="action-btn danger"
+          [disabled]="sobre.length === 0">
+          🗑 Vaciar Sobre
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
-
-<hr>
-
-<h3>Sobre actual</h3>
-
-<div *ngIf="sobre.length === 0">
-  <p>No se han agregado hojas al sobre.</p>
-</div>
-<ul>
-  <li *ngFor="let hoja of sobre; let i = index">
-    {{ i + 1 }}. {{ hoja.nombre }}
-  </li>
-</ul>
-
-<br>
-
-<!-- aquí viene el render condicional -->
-<button 
-  *ngIf="sobre.length > 0" 
-  ejs-button 
-  (click)="emitirVoto()">
-  Emitir voto
-</button>
-
-<button 
-  *ngIf="sobre.length === 0" 
-  ejs-button 
-  cssClass="e-outline" 
-  (click)="votarEnBlanco()">
-  Votar en blanco
-</button>
-
-<button 
-  ejs-button 
-  cssClass="e-danger" 
-  (click)="vaciarSobre()">
-  Vaciar sobre
-</button>
