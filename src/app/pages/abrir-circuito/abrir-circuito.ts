@@ -7,6 +7,7 @@ import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
   standalone: true,
   imports: [ButtonModule],
   templateUrl: './abrir-circuito.html',
+  styleUrls: ['./abrir-circuito.css']
 })
 export class AbrirCircuito {
   constructor(private router: Router) {}
