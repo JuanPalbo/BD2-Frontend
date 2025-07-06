@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-registro-votante',
@@ -13,14 +14,29 @@ import { Router } from '@angular/router';
 })
 export class RegistroVotante {
   credencial = '';
-  circuito = '';
+  pin = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private http: HttpClient) {}
 
-  registrar() {
-    console.log(`Credencial: ${this.credencial}, Circuito: ${this.circuito}`);
-    // PLACEHOLDER: Acá va la lógica de registro del votante
-    this.router.navigate(['/votar']);
+  verificarYVotar() {
+    const datos = {
+      credencial: this.credencial,
+      pin: this.pin
+    };
+
+    this.http.post<any>('/api/verificar-votante', datos).subscribe({
+      next: (response) => {
+        if (response.puedeVotar) {
+          console.log('Acceso concedido');
+          this.router.navigate(['/votar']);
+        } else {
+          alert('Acceso denegado: PIN incorrecto');
+        }
+      },
+      error: (error) => {
+        console.error('Error al verificar el votante', error);
+        alert('Error al verificar el votante. Por favor, inténtelo de nuevo.');
+      }
+    });
   }
 }
-
