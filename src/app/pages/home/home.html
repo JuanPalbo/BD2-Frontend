@@ -1,7 +1,15 @@
-<h2>Panel del Presidente de Mesa</h2>
-<p>El circuito está abierto y puede comenzar a registrar votantes.</p>
-
-<br>
-
-<button ejs-button (click)="irARegistro()">Registrar votante</button>
-<button ejs-button cssClass="e-danger" (click)="cerrarCircuito()">Cerrar circuito</button>
+<div class="container">
+  <header>
+    <h2>Panel del Presidente de Mesa</h2>
+  </header>
+  <p>El circuito está abierto y puede comenzar a registrar votantes.</p>
+  
+  <div class="buttons-container">
+    <button ejs-button (click)="irARegistro()" class="primary-button">
+      Registrar Votante
+    </button>
+    <button ejs-button (click)="cerrarCircuito()" class="danger-button">
+      Cerrar Circuito
+    </button>
+  </div>
+</div>
