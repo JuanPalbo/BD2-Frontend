@@ -1,0 +1,159 @@
+.app-header {
+background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 3px solid #e0e0e0;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-image {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}
+
+.app-logo {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
+.logo-text h1 {
+  color: #333;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  text-shadow: none;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 10px;
+}
+
+.nav-item {
+  margin: 0;
+}
+
+.nav-button {
+  background: #f8f9fa;
+  border: 2px solid #dee2e6;
+  color: #495057;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-button:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.nav-button:active {
+  transform: translateY(0);
+}
+
+.nav-button.logout {
+  background: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+.nav-button.logout:hover {
+  background: #f1b0b7;
+  border-color: #f5c6cb;
+}
+
+.nav-icon {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    height: auto;
+    padding: 15px 20px;
+  }
+  
+  .logo-section {
+    margin-bottom: 15px;
+  }
+  
+  .logo-text h1 {
+    font-size: 20px;
+  }
+  
+  .nav-menu {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+  
+  .nav-button {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    padding: 10px 15px;
+  }
+  
+  .logo-section {
+    gap: 10px;
+  }
+  
+  .logo-image {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .logo-text h1 {
+    font-size: 18px;
+  }
+  
+  .nav-button {
+    padding: 10px 15px;
+    font-size: 13px;
+  }
+}

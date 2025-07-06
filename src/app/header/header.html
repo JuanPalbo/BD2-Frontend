@@ -1,1 +1,31 @@
-<p>header works!</p>
+<header class="app-header">
+  <div class="header-container">
+    <div class="logo-section">
+      <div class="logo-image">
+        <img src="logo_uruguay-removebg-preview.png" alt="Logo" class="app-logo">
+      </div>
+      <div class="logo-text">
+        <h1>Sistema de Votación Electrónica</h1>
+      </div>
+    </div>
+    <nav class="navigation">
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <button class="nav-button" (click)="irARegistrarVotante()">
+            Registrar Votante
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-button" (click)="cerrarCircuito()">
+            Cerrar Circuito
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-button logout" (click)="logout()">
+            Salir
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

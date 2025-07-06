@@ -5,6 +5,7 @@ import { Votar } from './pages/votar/votar';
 import { AbrirCircuito } from './pages/abrir-circuito/abrir-circuito';
 import { Home } from './pages/home/home';
 import { CircuitoCerrado } from './pages/circuito-cerrado/circuito-cerrado';
+import { Resultados } from './resultados/resultados';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -14,4 +15,6 @@ export const routes: Routes = [
   { path: 'abrir-circuito', component: AbrirCircuito },
   { path: 'home', component: Home },
   { path: 'circuito-cerrado', component: CircuitoCerrado },
+  { path: 'resultados-circuito', component: Resultados },
+  { path: 'resultados-globales', component: Resultados },
 ];
