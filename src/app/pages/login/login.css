@@ -118,6 +118,27 @@ header h2 {
   background-color: #023d8a;
 }
 
+/* Estilos para el mensaje de información del administrador */
+.admin-info {
+  margin-top: 30px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid #034AA6;
+  text-align: left;
+}
+
+.admin-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.admin-info p:first-child {
+  color: #034AA6;
+  font-weight: bold;
+}
+
 /* Responsive */
 @media (max-width: 480px) {
   .container {

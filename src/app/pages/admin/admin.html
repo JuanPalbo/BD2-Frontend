@@ -1,0 +1,300 @@
+<app-header></app-header>
+
+<div class="page-content">
+  <div class="admin-container">
+    <!-- Sidebar de navegación -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h3>Panel de Administración</h3>
+      </div>
+      <nav class="sidebar-nav">
+        <button 
+          class="nav-item" 
+          [class.active]="vistaActual === 'dashboard'"
+          (click)="cambiarVista('dashboard')">
+          Dashboard
+        </button>
+        <button 
+          class="nav-item" 
+          [class.active]="vistaActual === 'operadores'"
+          (click)="cambiarVista('operadores')">
+          Operadores
+        </button>
+        <button 
+          class="nav-item" 
+          [class.active]="vistaActual === 'elecciones'"
+          (click)="cambiarVista('elecciones')">
+          Elecciones
+        </button>
+        <button 
+          class="nav-item" 
+          [class.active]="vistaActual === 'listas'"
+          (click)="cambiarVista('listas')">
+          Listas
+        </button>
+        <button 
+          class="nav-item" 
+          [class.active]="vistaActual === 'circuitos'"
+          (click)="cambiarVista('circuitos')">
+          Circuitos
+        </button>
+      </nav>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+      
+      <!-- Dashboard -->
+      <div *ngIf="vistaActual === 'dashboard'" class="content-section">
+        <h2>Dashboard Administrativo</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">{{ operadores.length }}</div>
+            <div class="stat-label">Operadores</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">{{ elecciones.length }}</div>
+            <div class="stat-label">Elecciones</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">{{ listas.length }}</div>
+            <div class="stat-label">Listas</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">{{ circuitos.length }}</div>
+            <div class="stat-label">Circuitos</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gestión de Operadores -->
+      <div *ngIf="vistaActual === 'operadores'" class="content-section">
+        <h2>Gestión de Operadores</h2>
+        
+        <div class="form-card">
+          <h3>Crear Nuevo Operador</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre:</label>
+              <input [(ngModel)]="nuevoOperador.nombre" placeholder="Nombre completo" class="form-input">
+            </div>
+            <div class="form-group">
+              <label>Credencial:</label>
+              <input [(ngModel)]="nuevoOperador.credencial" placeholder="Credencial única" class="form-input">
+            </div>
+            <div class="form-group">
+              <label>Contraseña:</label>
+              <input type="password" [(ngModel)]="nuevoOperador.password" placeholder="Contraseña" class="form-input">
+            </div>
+          </div>
+          <button (click)="crearOperador()" class="primary-button">Crear Operador</button>
+        </div>
+
+        <div class="table-card">
+          <h3>Operadores Existentes</h3>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Credencial</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let operador of operadores">
+                <td>{{ operador.id }}</td>
+                <td>{{ operador.nombre }}</td>
+                <td>{{ operador.credencial }}</td>
+                <td>
+                  <span class="status" [class.active]="operador.estado === 'Activo'">
+                    {{ operador.estado }}
+                  </span>
+                </td>
+                <td>
+                  <button (click)="editarOperador(operador)" class="secondary-button">Editar</button>
+                  <button (click)="eliminarOperador(operador.id)" class="danger-button">Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Gestión de Elecciones -->
+      <div *ngIf="vistaActual === 'elecciones'" class="content-section">
+        <h2>Gestión de Elecciones</h2>
+        
+        <div class="form-card">
+          <h3>Crear Nueva Elección</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre:</label>
+              <input [(ngModel)]="nuevaEleccion.nombre" placeholder="Nombre de la elección" class="form-input">
+            </div>
+            <div class="form-group">
+              <label>Fecha:</label>
+              <input type="date" [(ngModel)]="nuevaEleccion.fecha" class="form-input">
+            </div>
+            <div class="form-group">
+              <label>Descripción:</label>
+              <input [(ngModel)]="nuevaEleccion.descripcion" placeholder="Descripción" class="form-input">
+            </div>
+          </div>
+          <button (click)="crearEleccion()" class="primary-button">Crear Elección</button>
+        </div>
+
+        <div class="table-card">
+          <h3>Elecciones Existentes</h3>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let eleccion of elecciones">
+                <td>{{ eleccion.id }}</td>
+                <td>{{ eleccion.nombre }}</td>
+                <td>{{ eleccion.fecha }}</td>
+                <td>
+                  <span class="status">{{ eleccion.estado }}</span>
+                </td>
+                <td>
+                  <button (click)="eliminarEleccion(eleccion.id)" class="danger-button">Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Gestión de Listas -->
+      <div *ngIf="vistaActual === 'listas'" class="content-section">
+        <h2>Gestión de Listas</h2>
+        
+        <div class="form-card">
+          <h3>Crear Nueva Lista</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre:</label>
+              <input [(ngModel)]="nuevaLista.nombre" placeholder="Nombre de la lista" class="form-input">
+            </div>
+            <div class="form-group">
+              <label>Partido:</label>
+              <input [(ngModel)]="nuevaLista.partido" placeholder="Partido político" class="form-input">
+            </div>
+            <div class="form-group">
+              <label>Elección:</label>
+              <select [(ngModel)]="nuevaLista.eleccionId" class="form-input">
+                <option *ngFor="let eleccion of elecciones" [value]="eleccion.id">
+                  {{ eleccion.nombre }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <button (click)="crearLista()" class="primary-button">Crear Lista</button>
+        </div>
+
+        <div class="table-card">
+          <h3>Listas Existentes</h3>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Partido</th>
+                <th>Elección</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let lista of listas">
+                <td>{{ lista.id }}</td>
+                <td>{{ lista.nombre }}</td>
+                <td>{{ lista.partido }}</td>
+                <td>{{ getNombreEleccion(lista.eleccionId) }}</td>
+                <td>
+                  <button (click)="eliminarLista(lista.id)" class="danger-button">Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Gestión de Circuitos -->
+      <div *ngIf="vistaActual === 'circuitos'" class="content-section">
+        <h2>Gestión de Circuitos</h2>
+        
+        <div class="form-card">
+          <h3>Crear Nuevo Circuito</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre:</label>
+              <input [(ngModel)]="nuevoCircuito.nombre" placeholder="Nombre del circuito" class="form-input">
+            </div>
+            <div class="form-group">
+              <label>Ubicación:</label>
+              <input [(ngModel)]="nuevoCircuito.ubicacion" placeholder="Ubicación" class="form-input">
+            </div>
+            <div class="form-group">
+              <label>Operador Asignado:</label>
+              <select [(ngModel)]="nuevoCircuito.operadorId" class="form-input">
+                <option value="0">Sin asignar</option>
+                <option *ngFor="let operador of operadores" [value]="operador.id">
+                  {{ operador.nombre }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <button (click)="crearCircuito()" class="primary-button">Crear Circuito</button>
+        </div>
+
+        <div class="table-card">
+          <h3>Circuitos Existentes</h3>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Ubicación</th>
+                <th>Operador</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let circuito of circuitos">
+                <td>{{ circuito.id }}</td>
+                <td>{{ circuito.nombre }}</td>
+                <td>{{ circuito.ubicacion }}</td>
+                <td>{{ getNombreOperador(circuito.operadorId || 0) }}</td>
+                <td>
+                  <span class="status" [class.active]="circuito.estado === 'Activo'">
+                    {{ circuito.estado }}
+                  </span>
+                </td>
+                <td>
+                  <select (change)="asignarOperador(circuito.id, +$any($event.target).value)" class="form-input small">
+                    <option value="0">Cambiar operador</option>
+                    <option *ngFor="let operador of operadores" [value]="operador.id">
+                      {{ operador.nombre }}
+                    </option>
+                  </select>
+                  <button (click)="eliminarCircuito(circuito.id)" class="danger-button">Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

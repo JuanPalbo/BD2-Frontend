@@ -24,8 +24,15 @@ export class Login {
 
   login() {
     console.log('Login simulado:', this.credencial, this.password);
+    
+    // Verificar si es administrador
+    if (this.credencial === 'admin' && this.password === 'admin123') {
+      this.router.navigate(['/admin']);
+      return;
+    }
+    
+    // Login normal para operadores
     this.router.navigate(['/abrir-circuito']);
-    // Mega simulado
   }
 }
 
